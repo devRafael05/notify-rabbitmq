@@ -56,7 +56,7 @@ FROM_EMAIL=seuemail@seudominio.com
 # WhatsApp (Evolution API)
 WHATSAPP_API_URL=https://evo.zerusbarber.com.br
 WHATSAPP_API_TOKEN=SEU_TOKEN_AQUI
-WHATSAPP_INSTANCE_ID=ZerusBarber
+WHATSAPP_INSTANCE_ID=Instancia
 ```
 
 ---
