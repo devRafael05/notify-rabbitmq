@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Install Requirements') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Deploy') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Deploying to production...'
+                // Adicione aqui seus comandos de deploy
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+        failure {
+            mail to: 'rafaelsilva.dev05@gmail.com',
+                 subject: "Falha no Pipeline: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "Verifique o pipeline em ${env.BUILD_URL}"
+        }
+    }
+}
