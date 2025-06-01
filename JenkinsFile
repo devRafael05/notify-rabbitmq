@@ -1,8 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'python:3.10' }
+    }
 
     stages {
-
         stage('Install Requirements') {
             steps {
                 sh 'pip install -r requirements.txt'
@@ -15,7 +16,7 @@ pipeline {
             }
             steps {
                 echo 'Deploying to production...'
-                // Adicione aqui seus comandos de deploy
+                // Comandos de deploy aqui
             }
         }
     }
@@ -25,9 +26,9 @@ pipeline {
             cleanWs()
         }
         failure {
-            mail to: 'rafaelsilva.dev05@gmail.com',
-                 subject: "Falha no Pipeline: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Verifique o pipeline em ${env.BUILD_URL}"
+            // Apenas log por enquanto para evitar erro SMTP
+            echo "Pipeline falhou! Verifique o Jenkins."
+            // mail pode ser ativado depois que configurar SMTP
         }
     }
 }
